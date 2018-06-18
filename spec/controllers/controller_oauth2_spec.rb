@@ -201,7 +201,7 @@ describe SorceryController, active_record: true, type: :controller do
       end
 
       sorcery_reload!([:user_activation,:external], :user_activation_mailer => ::SorceryMailer)
-      sorcery_controller_property_set(:external_providers, [:facebook, :github, :google, :liveid, :vk, :salesforce, :paypal, :slack, :wechat, :microsoft])
+      sorcery_controller_property_set(:external_providers, [:facebook, :github, :google, :liveid, :vk, :salesforce, :paypal, :slack, :wechat, :microsoft, :line])
 
       # TODO: refactor
       sorcery_controller_external_property_set(:facebook, :key, "eYVNBjBDi33aa9GkA3w")
@@ -234,6 +234,9 @@ describe SorceryController, active_record: true, type: :controller do
       sorcery_controller_external_property_set(:microsoft, :key, "eYVNBjBDi33aa9GkA3w")
       sorcery_controller_external_property_set(:microsoft, :secret, "XpbeSdCoaKSmQGSeokz5qcUATClRW5u08QWNfv71N8")
       sorcery_controller_external_property_set(:microsoft, :callback_url, "http://blabla.com")
+      sorcery_controller_external_property_set(:line, :key, "eYVNBjBDi33aa9GkA3w")
+      sorcery_controller_external_property_set(:line, :secret, "XpbeSdCoaKSmQGSeokz5qcUATClRW5u08QWNfv71N8")
+      sorcery_controller_external_property_set(:line, :callback_url, "http://blabla.com")
     end
 
     after(:all) do
@@ -403,6 +406,7 @@ describe SorceryController, active_record: true, type: :controller do
                            },
                            # response for wechat auth
                            'unionid' => '123',
+                           'userId' => '123'
                          }.to_json }
     allow(access_token).to receive(:get) { response }
     allow(access_token).to receive(:token) { '187041a618229fdaf16613e96e1caabc1e86e46bbfad228de41520e63fe45873684c365a14417289599f3' }
@@ -412,7 +416,7 @@ describe SorceryController, active_record: true, type: :controller do
   end
 
   def set_external_property
-    sorcery_controller_property_set(:external_providers, [:facebook, :github, :google, :liveid, :vk, :salesforce, :paypal, :slack, :wechat, :microsoft])
+    sorcery_controller_property_set(:external_providers, [:facebook, :github, :google, :liveid, :vk, :salesforce, :paypal, :slack, :wechat, :microsoft, :line])
     sorcery_controller_external_property_set(:facebook, :key, "eYVNBjBDi33aa9GkA3w")
     sorcery_controller_external_property_set(:facebook, :secret, "XpbeSdCoaKSmQGSeokz5qcUATClRW5u08QWNfv71N8")
     sorcery_controller_external_property_set(:facebook, :callback_url, "http://blabla.com")
@@ -443,6 +447,9 @@ describe SorceryController, active_record: true, type: :controller do
     sorcery_controller_external_property_set(:microsoft, :key, "eYVNBjBDi33aa9GkA3w")
     sorcery_controller_external_property_set(:microsoft, :secret, "XpbeSdCoaKSmQGSeokz5qcUATClRW5u08QWNfv71N8")
     sorcery_controller_external_property_set(:microsoft, :callback_url, "http://blabla.com")
+    sorcery_controller_external_property_set(:line, :key, "eYVNBjBDi33aa9GkA3w")
+    sorcery_controller_external_property_set(:line, :secret, "XpbeSdCoaKSmQGSeokz5qcUATClRW5u08QWNfv71N8")
+    sorcery_controller_external_property_set(:line, :callback_url, "http://blabla.com")
   end
 
   def provider_url(provider)
